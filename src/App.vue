@@ -1,15 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-
-  <ProgressBar> </ProgressBar>
+<ProgressBar></ProgressBar>
+  <LoginForm> </LoginForm>
 </template>
 
 <script>
+import LoginForm from "./components/Login.vue"
 import ProgressBar from "./components/ProgressBar.vue"
 
 export default {
   name: 'App',
   components: {
+    LoginForm,
     ProgressBar
   }
 }
