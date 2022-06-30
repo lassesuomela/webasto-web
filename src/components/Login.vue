@@ -17,7 +17,7 @@ import axios from "../axios";
 
 export default {
     
-    name: 'LoginForm',
+    name: 'LoginFormComponent',
     components: {
         
     },

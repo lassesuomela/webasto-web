@@ -17,7 +17,7 @@ import LvProgressBar from 'lightvue/progress-bar';
 
 export default {
     
-    name: 'ProgressBar',
+    name: 'ProgressBarComponent',
     components: {
         LvProgressBar
     },

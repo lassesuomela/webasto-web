@@ -1,17 +1,26 @@
 <template>
-<ProgressBar></ProgressBar>
-  <LoginForm> </LoginForm>
+  <ProgressBar/>
+  <LoginForm/>
+  <Logs/>
+  <TimersComponent/>
+  <BarChart/>
 </template>
 
 <script>
 import LoginForm from "./components/Login.vue"
 import ProgressBar from "./components/ProgressBar.vue"
+import Logs from "./components/Logs.vue"
+import TimersComponent from "./components/Timers.vue"
+import BarChart from "./components/BarChart.vue"
 
 export default {
   name: 'App',
   components: {
     LoginForm,
-    ProgressBar
+    ProgressBar,
+    Logs,
+    TimersComponent,
+    BarChart
   }
 }
 </script>
