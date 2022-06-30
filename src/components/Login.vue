@@ -35,12 +35,11 @@ export default {
                 password: this.password
             }
             axios.post("/login", data).then(response => {
-                console.log(response);
                 this.loginResponse = response.data.message;
+
                 if(response.data.status === "success"){
-                    localStorage.setItem("token", response.data.token);
-                }else{
                     localStorage.removeItem("token");
+                    localStorage.setItem("token", response.data.token);
                 }
             })
         }

@@ -1,8 +1,9 @@
 <template>
   <div id="nav">
     <router-link to="/login">Login</router-link>
-    <router-link to="/timers">Timers</router-link>
-    <router-link to="/logs">Logs</router-link>
+    <router-link style="padding-left: 1em" to="/timers">Timers</router-link>
+    <router-link style="padding-left: 1em" to="/logs">Logs</router-link>
+    <router-link style="padding-left: 1em" to="/logout">Logout</router-link>
   </div>
 
   <router-view/>
