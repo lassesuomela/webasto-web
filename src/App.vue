@@ -1,26 +1,19 @@
 <template>
-  <ProgressBar/>
-  <LoginForm/>
-  <Logs/>
-  <TimersComponent/>
-  <BarChart/>
+  <div id="nav">
+    <router-link to="/login">Login</router-link>
+    <router-link to="/timers">Timers</router-link>
+    <router-link to="/logs">Logs</router-link>
+  </div>
+
+  <router-view/>
 </template>
 
 <script>
-import LoginForm from "./components/Login.vue"
-import ProgressBar from "./components/ProgressBar.vue"
-import Logs from "./components/Logs.vue"
-import TimersComponent from "./components/Timers.vue"
-import BarChart from "./components/BarChart.vue"
 
 export default {
   name: 'App',
   components: {
-    LoginForm,
-    ProgressBar,
-    Logs,
-    TimersComponent,
-    BarChart
+    
   }
 }
 </script>

@@ -21,7 +21,9 @@
         </tbody>
         
     </table>
-        <button class="btn" v-for="index in maxPage" :key="index" @click="getLogs(index)">{{index}}</button>
+    <div v-if="maxPage > 1">
+        <button class="btn"  v-for="index in maxPage" :key="index" @click="getLogs(index)">{{index}}</button>
+    </div>
 </template>
 
 <script>
