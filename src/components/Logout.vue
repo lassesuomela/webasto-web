@@ -1,7 +1,5 @@
 <script>
 
-import router from "../router/index"
-
 export default {
     
     name: 'LogoutComponent',
@@ -18,10 +16,10 @@ export default {
             localStorage.removeItem("token");
 
             // and redirect to login page
-            router.push({name:"Login"});
+            this.$router.push({name:"Login"});
         }
     },
-    mounted () {
+    beforeMount () {
         this.LogOut();
     }
 }

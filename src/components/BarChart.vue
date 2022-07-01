@@ -1,4 +1,5 @@
 <template>
+    <div class="form-group">
     <Bar v-if="isLoaded"
         :chart-data="this.chartData"
         :height="24"

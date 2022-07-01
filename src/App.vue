@@ -1,15 +1,29 @@
 <template>
-  <div id="nav">
-    <router-link to="/login">Login</router-link>
-    <router-link style="padding-left: 1em" to="/timers">Timers</router-link>
-    <router-link style="padding-left: 1em" to="/logs">Logs</router-link>
-    <router-link style="padding-left: 1em" to="/logout">Logout</router-link>
-  </div>
 
-  <router-view/>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+
+      <ul class="navbar-nav">
+
+        <p class="navbar-brand">Webasto controller</p>
+
+        <router-link :to="{name: 'Login'}" class="nav-link">Login</router-link>
+
+        <router-link :to="{name: 'Logs'}" class="nav-link">Logs</router-link>
+
+        <router-link :to="{name: 'Timers'}" class="nav-link">Timers</router-link>
+
+        <router-link :to="{name: 'Logout'}" class="nav-link">Logout</router-link>
+
+      </ul>
+  </nav>
+  <div class="container">
+    <router-view/>
+  </div>
 </template>
 
 <script>
+
+import "bootstrap/dist/css/bootstrap.css";
 
 export default {
   name: 'App',
@@ -26,6 +40,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.container {
+  margin-top: 2rem;
+}
+
+.navbar-nav{
+  margin: 1rem 0 0 1rem;
+}
+
+.exact-active-link {
+  font-weight: bold;
 }
 </style>

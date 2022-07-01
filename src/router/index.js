@@ -3,6 +3,9 @@ import Login from "@/components/Login.vue";
 import Timers from "@/components/Timers.vue";
 import Logs from "@/components/Logs.vue";
 import Logout from "@/components/Logout.vue";
+import ProgressBar from "@/components/ProgressBar.vue";
+
+import axios from "../axios"
 
 const routes = [
   {
@@ -14,22 +17,62 @@ const routes = [
     path: "/timers",
     name: "Timers",
     component: Timers,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: "/logs",
     name: "Logs",
     component: Logs,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: "/logout",
     name: "Logout",
     component: Logout,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: "/",
+    name: "Dashboard",
+    component: ProgressBar,
+    meta: {
+      requireAuth: true
+    }
   }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  linkActiveClass: 'active-link',
+  linkExactActiveClass: 'exact-active-link',
 });
+
+router.beforeEach((to, next) => {
+
+  if(to.meta.requireAuth) {
+
+    console.log("key = " + localStorage.getItem("token"));
+    axios.get('/voltage').then(response => {
+      if(response.data.status){
+        console.log("key is good");
+        next();
+      }
+    }).catch(error => {
+      if(error.response.status === 401 || error.response.status === 403){
+        // key expired
+        console.log("key is bad");
+        
+        return router.push({name:"Login"});
+      }
+    })
+  }
+})
 
 export default router;

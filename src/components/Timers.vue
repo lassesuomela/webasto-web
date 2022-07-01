@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import axios from "../axios";
 
@@ -36,16 +36,13 @@ export default {
     data () {
         return {
             timers: [],
-            weekdays: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"],
         }
     },
     methods: {
         getTimers() {
-            axios.get('/timers/all/').then(response => {
+            axios.get('/timers/all').then(response => {
 
                 this.timers = response.data;
-            }).catch(error => {
-                console.log(error);
             })
         }
     },
