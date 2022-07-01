@@ -2,6 +2,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
+                <th>Viikonpäivä</th>
                 <th>1. Aloitusaika</th>
                 <th>2. Aloitusaika</th>
                 <th>1. Aktivoitu</th>
@@ -11,7 +12,9 @@
         </thead>
 
         <tbody>
-            <tr v-for="timer in timers" :key="timer">
+            <tr v-for="(timer, index) in timers" :key="timer">
+
+                <td>{{weekdays[index]}}</td>
                 <td>{{timer.time}}</td>
                 <td>{{timer.time2}}</td>
                 <td>{{timer.enabled}}</td>
@@ -36,6 +39,7 @@ export default {
     data () {
         return {
             timers: [],
+            weekdays: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"]
         }
     },
     methods: {

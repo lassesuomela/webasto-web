@@ -4,15 +4,19 @@
 
       <ul class="navbar-nav">
 
-        <p class="navbar-brand">Webasto controller</p>
+        <p class="navbar-brand">Webaston ohjain</p>
 
-        <router-link :to="{name: 'Login'}" class="nav-link">Login</router-link>
+        <router-link :to="{name: 'Login'}" class="nav-link">Kirjaudu sisään</router-link>
 
-        <router-link :to="{name: 'Logs'}" class="nav-link">Logs</router-link>
+        <router-link :to="{name: 'Dashboard'}" class="nav-link">Hallintapaneeli</router-link>
 
-        <router-link :to="{name: 'Timers'}" class="nav-link">Timers</router-link>
+        <router-link :to="{name: 'Timers'}" class="nav-link">Ajastimet</router-link>
 
-        <router-link :to="{name: 'Logout'}" class="nav-link">Logout</router-link>
+        <router-link :to="{name: 'Logs'}" class="nav-link">Historia</router-link>
+
+        <router-link :to="{name: 'Uptime'}" class="nav-link">Uptime</router-link>
+
+        <router-link :to="{name: 'Logout'}" class="nav-link">Kirjaudu ulos</router-link>
 
       </ul>
   </nav>

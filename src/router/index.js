@@ -4,6 +4,7 @@ import Timers from "@/components/Timers.vue";
 import Logs from "@/components/Logs.vue";
 import Logout from "@/components/Logout.vue";
 import ProgressBar from "@/components/ProgressBar.vue";
+import BarChart from "@/components/BarChart.vue";
 
 import axios from "../axios"
 
@@ -44,7 +45,16 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: "/uptime",
+    name:"Uptime",
+    component: BarChart,
+    meta: {
+      requireAuth: true
+    }
   }
+  
 ];
 
 const router = createRouter({

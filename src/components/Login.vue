@@ -3,15 +3,15 @@
     <div id="loginForm">
         <form @submit.prevent="AuthenticateUser">
             <div class="form-group">
-                <label for="usernameField">Username</label>
-                <input v-model="username" placeholder="Username" class="form-control" id="usernameField">
+                <label for="usernameField">Käyttäjänimi</label>
+                <input v-model="username" placeholder="Käyttäjänimi" class="form-control" id="usernameField">
             </div>
             <div class="form-group">
-                <label for="passwordField">Password</label>
-                <input v-model="password" placeholder="Password" type="password" class="form-control " id="passwordField">
+                <label for="passwordField">Salasana</label>
+                <input v-model="password" placeholder="Salasana" type="password" class="form-control " id="passwordField">
             </div>
             <div id="submitLogin" class="form-group">
-                <input type="submit" value="Log in" class="btn btn-primary">
+                <input type="submit" value="Kirjaudu sisään" class="btn btn-primary">
 
                 <h5 id="response">{{loginResponse}}</h5>
             </div>
@@ -49,7 +49,7 @@ export default {
                     localStorage.removeItem("token");
                     localStorage.setItem("token", response.data.token);
 
-                    this.$router.push({name:"Timers"});
+                    this.$router.push({name:"Dashboard"});
                 }
             })
         }
@@ -59,7 +59,7 @@ export default {
         const response = await axios.get('/logs');
 
         if(response.data.status === "success"){
-            this.$router.push({name:"Timers"});
+            this.$router.push({name:"Dashboard"});
         }
     }
 }

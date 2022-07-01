@@ -1,9 +1,9 @@
 <template>
-    <div class="form-group">
+
     <Bar v-if="isLoaded"
         :chart-data="this.chartData"
-        :height="24"
-        :width="128"
+        :height="32"
+        :width="64"
     />
 </template>
 
@@ -49,7 +49,7 @@ export default {
                         labels: this.days,
                         datasets: [{
                             data: this.uptimes,
-                            backgroundColor: '#5cb85c',
+                            backgroundColor: '#198754',
                             label: 'Uptime'
                         }]
                     }
