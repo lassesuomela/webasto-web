@@ -1,5 +1,10 @@
 
 <template>
+
+    <div class="container">
+        <h2>Kirjaudu sisään</h2>
+    </div>
+
     <div id="loginForm">
         <form @submit.prevent="AuthenticateUser">
             <div class="form-group">
@@ -42,24 +47,24 @@ export default {
                 username: this.username,
                 password: this.password
             }
-            axios.post("/login", data).then(response => {
+            axios.post("/api/login", data).then(response => {
                 this.loginResponse = response.data.message;
 
                 if(response.data.status === "success"){
                     localStorage.removeItem("token");
                     localStorage.setItem("token", response.data.token);
 
-                    this.$router.push({name:"Dashboard"});
+                    this.$router.push({name:"Home"});
                 }
             })
         }
     },
     async mounted () {
         
-        const response = await axios.get('/logs');
+        const response = await axios.get('/api/logs');
 
         if(response.data.status === "success"){
-            this.$router.push({name:"Dashboard"});
+            this.$router.push({name:"Home"});
         }
     }
 }

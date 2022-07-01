@@ -6,18 +6,12 @@
 
         <p class="navbar-brand">Webaston ohjain</p>
 
-        <router-link :to="{name: 'Login'}" class="nav-link">Kirjaudu sisään</router-link>
-
-        <router-link :to="{name: 'Dashboard'}" class="nav-link">Hallintapaneeli</router-link>
-
-        <router-link :to="{name: 'Timers'}" class="nav-link">Ajastimet</router-link>
-
-        <router-link :to="{name: 'Logs'}" class="nav-link">Historia</router-link>
-
-        <router-link :to="{name: 'Uptime'}" class="nav-link">Uptime</router-link>
-
-        <router-link :to="{name: 'Logout'}" class="nav-link">Kirjaudu ulos</router-link>
-
+          <router-link v-if="hasToken" :to="{name: 'Home'}" class="nav-link">Päänäkymä</router-link>
+          <router-link v-if="hasToken" :to="{name: 'Timers'}" class="nav-link">Ajastimet</router-link>
+          <router-link v-if="hasToken" :to="{name: 'Logs'}" class="nav-link">Historia</router-link>
+          <router-link v-if="hasToken" :to="{name: 'Uptime'}" class="nav-link">Uptime</router-link>
+          <router-link v-if="hasToken" :to="{name: 'Upload'}" class="nav-link">OTA</router-link>
+          <router-link v-if="hasToken" :to="{name: 'Logout'}" class="nav-link">Kirjaudu ulos</router-link>
       </ul>
   </nav>
   <div class="container">
@@ -33,8 +27,19 @@ export default {
   name: 'App',
   components: {
     
+  },
+  data () {
+    return {
+      hasToken: false,
+    }
+  },
+  beforeMount () {
+    if(localStorage.getItem('token')){
+      this.hasToken = true;
+    }
   }
 }
+
 </script>
 
 <style>

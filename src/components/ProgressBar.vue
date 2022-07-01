@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <h2>Webaston tila</h2>
+        <div class="container">
+            <h2>Päänäkymä</h2>
+        </div>
         <div class="container">
             
             <LvProgressBar :value="value" :showValue="false" color="#198754" />
@@ -8,24 +10,36 @@
             <div class="container">
                 <p>Päälläoloaika: {{currentOnTime}} / {{maxOnTime}} min</p>
             </div>
-            <p v-if="status">Webasto on päällä</p>
-            <p v-else>Webasto on sammutettu</p>
+            <p>Webaston tila: 
+                <span v-if="status">Päällä</span>
+                <span v-else>Sammutettu</span>
+            </p>
 
+            <p>Päivitetty: {{lastUpdate}}</p>
             <h3 v-if="serverError">Häiriö palvelimella</h3>
+
+
         </div>
     </div>
+
+    <TemperatureChart/>
+    <VoltageChart/>
 </template>
 
 <script>
 import axios from "../axios";
 
 import LvProgressBar from 'lightvue/progress-bar';
+import TemperatureChart from './TemperatureChart.vue';
+import VoltageChart from './VoltageChart.vue';
 
 export default {
     
     name: 'ProgressBarComponent',
     components: {
-        LvProgressBar
+        LvProgressBar,
+        TemperatureChart,
+        VoltageChart
     },
     data () {
         return {
@@ -34,12 +48,13 @@ export default {
             status: null,
             value: null,
             serverError: null,
+            lastUpdate: '-',
         }
     },
     methods: {
         async getStatus() {
 
-            axios.get('/status/1').then(response => {
+            axios.get('/api/status/1').then(response => {
                 this.maxOnTime = response.data.onTime;
 
             }).catch(error => {
@@ -47,9 +62,10 @@ export default {
                 this.serverError = 1;
             });
 
-            axios.get('/status/2').then(response => {
+            axios.get('/api/status/2').then(response => {
                 this.status = response.data.status;
                 this.currentOnTime = response.data.onTime;
+                this.lastUpdate = response.data.timestamp;
                 
                 this.updateProgress();
 

@@ -5,6 +5,7 @@ import Logs from "@/components/Logs.vue";
 import Logout from "@/components/Logout.vue";
 import ProgressBar from "@/components/ProgressBar.vue";
 import BarChart from "@/components/BarChart.vue";
+import FileUpload from "@/components/FileUpload.vue";
 
 import axios from "../axios"
 
@@ -40,7 +41,7 @@ const routes = [
   },
   {
     path: "/",
-    name: "Dashboard",
+    name: "Home",
     component: ProgressBar,
     meta: {
       requireAuth: true
@@ -50,6 +51,14 @@ const routes = [
     path: "/uptime",
     name:"Uptime",
     component: BarChart,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path:"/upload",
+    name:"Upload",
+    component: FileUpload,
     meta: {
       requireAuth: true
     }
@@ -69,7 +78,7 @@ router.beforeEach((to, next) => {
   if(to.meta.requireAuth) {
 
     console.log("key = " + localStorage.getItem("token"));
-    axios.get('/voltage').then(response => {
+    axios.get('/api/voltage').then(response => {
       if(response.data.status){
         console.log("key is good");
         next();

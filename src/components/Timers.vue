@@ -1,4 +1,9 @@
 <template>
+
+    <div class="container">
+        <h2>Ajastimet</h2>
+    </div>
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -44,7 +49,7 @@ export default {
     },
     methods: {
         getTimers() {
-            axios.get('/timers/all').then(response => {
+            axios.get('/api/timers/all').then(response => {
 
                 this.timers = response.data;
             })

@@ -1,5 +1,9 @@
 <template>
 
+    <div class="container">
+        <h2>Uptime</h2>
+    </div>
+
     <Bar v-if="isLoaded"
         :chart-data="this.chartData"
         :height="32"
@@ -32,7 +36,7 @@ export default {
     },
     methods: {
         async getUptime() {
-            axios.get('/uptime').then(response => {
+            axios.get('/api/uptime').then(response => {
 
                 if(response.data.status === "success") {
                     this.data = response.data.data;

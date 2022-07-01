@@ -1,4 +1,9 @@
 <template>
+
+    <div class="container">
+        <h2>Historia</h2>
+    </div>
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -22,7 +27,7 @@
         
     </table>
     <div v-if="maxPage > 1">
-        <button class="btn"  v-for="index in maxPage" :key="index" @click="getLogs(index)">{{index}}</button>
+        <button class="btn" v-for="index in maxPage" :key="index" @click="getLogs(index)">{{index}}</button>
     </div>
 </template>
 
@@ -45,7 +50,7 @@ export default {
     },
     methods: {
         getLogs(n) {
-            axios.get('/logs/' + n).then(response => {
+            axios.get('/api/logs/' + n).then(response => {
 
                 if(response.data.status === "success"){
                     this.logs = response.data.data;
