@@ -1,5 +1,7 @@
 <template>
 
+    <h2>OTA</h2>
+
     <div class="container">
 
         <form @submit.prevent="HandleFile" id="fileUploadForm">
@@ -20,6 +22,27 @@
             </div>
         </form>
     </div>
+
+    
+
+    <div class="container">
+
+        <h2>Tämänhetkinen OTA:</h2>
+
+        <div class="container" v-if="!fileStatusError">
+            <p>Versio nro:
+                <span>{{versioNro}}</span>
+            </p>
+
+            <p>Binääri tiedosto:</p>
+        
+            <p>{{uploadedFiles}}</p>
+        </div>
+
+        <div class="container" v-if="fileStatusError">
+            <p>Tiedostoja ei löytynyt</p>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -32,7 +55,10 @@ export default {
     },
     data () {
         return {
-            status: null
+            status: null,
+            uploadedFiles: null,
+            fileStatusError: null,
+            versioNro: null,
         }
     },
     methods: {
@@ -58,7 +84,27 @@ export default {
             }).catch(error => {
                 this.status = error;
             })
+        },
+        CheckUploadedFiles(){
+            axios.get('/ota/version').then(response => {
+
+                console.log(response);
+
+                if(response.data.status === "error"){
+                    this.fileStatusError = response.data.message;
+                    return;
+                }
+
+                this.uploadedFiles = response.data.link;
+                this.versioNro = response.data.version;
+
+            }).catch(error => {
+                console.log(error);
+            })
         }
+    },
+    mounted () {
+        this.CheckUploadedFiles();
     }
 }
 

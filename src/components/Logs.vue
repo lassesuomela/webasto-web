@@ -55,6 +55,15 @@ export default {
                 if(response.data.status === "success"){
                     this.logs = response.data.data;
                     this.maxPage = response.data.maxPageAmount;
+
+                    for(var i = 0; i < this.logs.length; i++){
+
+                        const event = new Date(this.logs[i].timestamp);
+                        
+                        let newTimestamp = event.toLocaleString('fi-FI');
+
+                        this.logs[i].timestamp = newTimestamp;
+                    }
                 }
                 
             })

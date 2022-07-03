@@ -5,7 +5,7 @@
         </div>
 
         <Line v-if="isLoaded"
-            :chart-data="this.chartData"
+            :chart-data="chartData"
             :height="32"
             :width="128"
         />
@@ -62,6 +62,15 @@ export default {
                     this.labelData[i] = response.data.timestamps[i];
                     this.tempData[i] = response.data.temperatures[i];
                     this.humiData[i] = response.data.humidities[i];
+                }
+
+                for(var i = 0; i < this.labelData.length; i++){
+
+                    const event = new Date(this.labelData[i]);
+                    
+                    let newTimestamp = event.toLocaleTimeString('fi-FI');
+
+                    this.labelData[i] = newTimestamp;
                 }
 
                 this.chartData = {

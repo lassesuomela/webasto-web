@@ -48,6 +48,17 @@ export default {
                 password: this.password
             }
             axios.post("/api/login", data).then(response => {
+
+                if(response.status === 429) {
+                    this.loginResponse = "Liikaa pyyntöjä liian pienessä ajassa. Kokeile myöhemmin uudestaan.";
+                    return;
+                }
+
+                if(response.status !== 200) {
+                    this.loginResponse = "Virhe palvelimella";
+                    return;
+                }
+
                 this.loginResponse = response.data.message;
 
                 if(response.data.status === "success"){

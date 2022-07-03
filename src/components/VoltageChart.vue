@@ -5,7 +5,7 @@
         </div>
 
         <Line v-if="isLoaded"
-            :chart-data="this.chartData"
+            :chart-data="chartData"
             :height="32"
             :width="128"
         />
@@ -48,7 +48,7 @@ export default {
             chartData: null,
             labelData: [],
             voltageData: [],
-            isLoaded: false
+            isLoaded: false,
         }
     },
     methods: {
@@ -62,6 +62,15 @@ export default {
                     this.voltageData[i] = response.data.voltages[i];
                 }
 
+                for(var i = 0; i < this.labelData.length; i++){
+
+                    const event = new Date(this.labelData[i]);
+                    
+                    let newTimestamp = event.toLocaleTimeString('fi-FI');
+
+                    this.labelData[i] = newTimestamp;
+                }
+
                 this.chartData = {
                     labels: this.labelData,
                     datasets: [
@@ -71,9 +80,9 @@ export default {
                             data: this.voltageData.reverse()
                         }
                     ]
-                }   
-                this.isLoaded = true;
+                }
 
+                this.isLoaded = true;
 
             }).catch(error =>{
                 console.log(error);
