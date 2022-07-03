@@ -77,16 +77,15 @@ router.beforeEach((to, next) => {
 
   if(to.meta.requireAuth) {
 
-    console.log("key = " + localStorage.getItem("token"));
     axios.get('/api/voltage').then(response => {
       if(response.data.status){
-        console.log("key is good");
+        console.log("Key is good");
         next();
       }
     }).catch(error => {
       if(error.response.status === 401 || error.response.status === 403){
         // key expired
-        console.log("key is bad");
+        console.log("Key is bad");
         
         return router.push({name:"Login"});
       }

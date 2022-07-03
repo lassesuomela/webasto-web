@@ -50,9 +50,9 @@ export default {
                     }
 
                     this.chartData = {
-                        labels: this.days,
+                        labels: this.days.reverse(),
                         datasets: [{
-                            data: this.uptimes,
+                            data: this.uptimes.reverse(),
                             backgroundColor: '#198754',
                             label: 'Uptime'
                         }]

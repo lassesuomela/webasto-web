@@ -57,7 +57,6 @@ export default {
 
             axios.get('/api/temp/hour').then(response => {
 
-                console.log(response.data);
                 for (let i = 0; i < response.data.timestamps.length; i++) {
                     this.labelData[i] = response.data.timestamps[i];
                     this.tempData[i] = response.data.temperatures[i];
