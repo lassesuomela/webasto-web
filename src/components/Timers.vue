@@ -52,6 +52,21 @@ export default {
             axios.get('/api/timers/all').then(response => {
 
                 this.timers = response.data;
+
+                // more visually pleasing dispay of activated and deactivated timers
+                for(let i = 0; i < this.timers.length; i++){
+                    if(this.timers[i].enabled === 0){
+                        this.timers[i].enabled = 'Ei';
+                    }else{
+                        this.timers[i].enabled = 'Kyllä';
+                    }
+
+                    if(this.timers[i].enabled2 === 0){
+                        this.timers[i].enabled2 = 'Ei';
+                    }else{
+                        this.timers[i].enabled2 = 'Kyllä';
+                    }
+                }
             })
         }
     },
