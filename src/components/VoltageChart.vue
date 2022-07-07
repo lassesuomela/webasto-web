@@ -8,6 +8,7 @@
             :chart-data="chartData"
             :height="32"
             :width="128"
+            :chart-options="options"
         />
     </div>
 </template>
@@ -49,6 +50,34 @@ export default {
             labelData: [],
             voltageData: [],
             isLoaded: false,
+            options: {
+                scales: {
+                    VoltageAxis: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Jännite (V)',
+                            font: {
+                                size: 18,
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Viimeisin tunti',
+                            font: {
+                                size: 18,
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    }
+                }
+            }
         }
     },
     methods: {
@@ -72,13 +101,12 @@ export default {
 
                 this.chartData = {
                     labels: this.labelData,
-                    datasets: [
-                        {
-                            label: 'Jännite',
-                            backgroundColor: '#0d6efd',
-                            data: this.voltageData.reverse()
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Jännite',
+                        backgroundColor: '#0d6efd',
+                        data: this.voltageData.reverse(),
+                        yAxisID: 'VoltageAxis'
+                    }]
                 }
 
                 this.isLoaded = true;

@@ -8,6 +8,7 @@
             :chart-data="chartData"
             :height="32"
             :width="128"
+            :chart-options="options"
         />
     </div>
 </template>
@@ -49,7 +50,48 @@ export default {
             labelData: [],
             tempData: [],
             humiData: [],
-            isLoaded: false
+            isLoaded: false,
+            options: {
+                scales: {
+                    TemperatureAxis: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Lämpötila (°C)',
+                            font: {
+                                size: 18,
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    HumidityAxis: {
+                        type: 'linear',
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Relattivinen kosteus (%)',
+                            font: {
+                                size: 18,
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Viimeisin tunti',
+                            font: {
+                                size: 18,
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    }
+                }
+            }
         }
     },
     methods: {
@@ -74,18 +116,20 @@ export default {
 
                 this.chartData = {
                     labels: this.labelData.reverse(),
-                    datasets: [
-                        {
-                            label: 'Lämpötila',
-                            backgroundColor: '#ffc107',
-                            data: this.tempData.reverse()
-                        },
-                        {
-                            label: 'Kosteus',
-                            backgroundColor: '#0dcaf0',
-                            data: this.humiData.reverse()
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Lämpötila',
+                        backgroundColor: '#ffc107',
+                        data: this.tempData.reverse(),
+                        tension: 0.3,
+                        yAxisID: 'TemperatureAxis'
+                    },
+                    {
+                        label: 'Relatiivinen kosteus',
+                        backgroundColor: '#0dcaf0',
+                        data: this.humiData.reverse(),
+                        tension: 0.3,
+                        yAxisID: 'HumidityAxis'
+                    }]
                 }   
                 this.isLoaded = true;
 
