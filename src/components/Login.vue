@@ -76,6 +76,8 @@ export default {
 
         if(response.data.status === "success"){
             this.$router.push({name:"Home"});
+        }else{
+            localStorage.removeItem("token");
         }
     }
 }
