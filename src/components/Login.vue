@@ -9,11 +9,11 @@
         <form @submit.prevent="AuthenticateUser">
             <div class="form-group">
                 <label for="usernameField">Käyttäjänimi</label>
-                <input v-model="username" placeholder="Käyttäjänimi" class="form-control" id="usernameField">
+                <input v-model="username" placeholder="Käyttäjänimi" class="form-control" id="usernameField" required>
             </div>
             <div class="form-group">
                 <label for="passwordField">Salasana</label>
-                <input v-model="password" placeholder="Salasana" type="password" class="form-control " id="passwordField">
+                <input v-model="password" placeholder="Salasana" type="password" class="form-control " id="passwordField" required>
             </div>
             <div id="submitLogin" class="form-group">
                 <input type="submit" value="Kirjaudu sisään" class="btn btn-primary">
