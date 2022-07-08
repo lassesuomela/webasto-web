@@ -17,7 +17,7 @@
             </div>
             <div class="container">
                 <label for="otpField">OTP</label>
-                <input v-model="otp" placeholder="OTP" type="number" class="form-control " id="otpField" required maxlength="6">
+                <input v-model="otp" placeholder="OTP" type="text" class="form-control " id="otpField" required maxlength="6">
             </div>
             <div id="submitLogin" class="container">
                 <input type="submit" value="Kirjaudu sisään" class="btn btn-primary">
