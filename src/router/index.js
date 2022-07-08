@@ -6,6 +6,7 @@ import Logout from "@/components/Logout.vue";
 import ProgressBar from "@/components/ProgressBar.vue";
 import BarChart from "@/components/BarChart.vue";
 import FileUpload from "@/components/FileUpload.vue";
+import Settings from "@/components/Settings.vue";
 
 import axios from "../axios"
 
@@ -59,6 +60,14 @@ const routes = [
     path:"/upload",
     name:"Upload",
     component: FileUpload,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path:"/settings",
+    name:"Settings",
+    component: Settings,
     meta: {
       requireAuth: true
     }
