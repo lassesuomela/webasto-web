@@ -3,6 +3,10 @@
     <div class="container">
         <h2>Asetukset</h2>
     </div>
+
+    <div class="container">
+        <h3>OTP</h3>
+    </div>
     
 
     <div class="container" v-if=!fetchedToken>

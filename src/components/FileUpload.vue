@@ -88,8 +88,6 @@ export default {
         CheckUploadedFiles(){
             axios.get('/ota/version').then(response => {
 
-                console.log(response);
-
                 if(response.data.status === "error"){
                     this.fileStatusError = response.data.message;
                     return;

@@ -7,15 +7,19 @@
 
     <div id="loginForm">
         <form @submit.prevent="AuthenticateUser">
-            <div class="form-group">
+            <div class="container">
                 <label for="usernameField">Käyttäjänimi</label>
                 <input v-model="username" placeholder="Käyttäjänimi" class="form-control" id="usernameField" required>
             </div>
-            <div class="form-group">
+            <div class="container">
                 <label for="passwordField">Salasana</label>
                 <input v-model="password" placeholder="Salasana" type="password" class="form-control " id="passwordField" required>
             </div>
-            <div id="submitLogin" class="form-group">
+            <div class="container">
+                <label for="otpField">OTP</label>
+                <input v-model="otp" placeholder="OTP" type="number" class="form-control " id="otpField" required maxlength="6">
+            </div>
+            <div id="submitLogin" class="container">
                 <input type="submit" value="Kirjaudu sisään" class="btn btn-primary">
 
                 <h5 id="response">{{loginResponse}}</h5>
@@ -37,6 +41,7 @@ export default {
         return {
             username: '',
             password: '',
+            otp: '',
             loginResponse: '',
             isLoggedIn: false
         }
@@ -45,7 +50,8 @@ export default {
         AuthenticateUser() {
             let data = {
                 username: this.username,
-                password: this.password
+                password: this.password,
+                otp: this.otp
             }
             axios.post("/api/login", data).then(response => {
 
