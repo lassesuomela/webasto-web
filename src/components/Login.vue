@@ -5,49 +5,87 @@
         <h2>Kirjaudu sisään</h2>
     </div>
 
-    <div id="loginForm">
-        <form @submit.prevent="AuthenticateUser">
-            <div class="container">
-                <label for="usernameField">Käyttäjänimi</label>
-                <input v-model="username" placeholder="Käyttäjänimi" class="form-control" id="usernameField" required>
-            </div>
-            <div class="container">
-                <label for="passwordField">Salasana</label>
-                <input v-model="password" placeholder="Salasana" type="password" class="form-control " id="passwordField" required>
-            </div>
-            <div class="container">
-                <label for="otpField">OTP</label>
-                <input v-model="otp" placeholder="OTP" type="text" class="form-control " id="otpField" required maxlength="6">
-            </div>
-            <div id="submitLogin" class="container">
-                <input type="submit" value="Kirjaudu sisään" class="btn btn-primary">
+    <div class="container">
 
-                <h5 id="response">{{loginResponse}}</h5>
-            </div>
+        <form  @Submit.prevent=AuthenticateUser id="loginForm">
+            <InputText
+                :bottom-bar="true"
+                placeholder="Käyttäjänimi"
+                placeholder-color="rgba(0, 0, 0, 0.4)"
+                icon-left="light-icon-user"
+                type="text"
+                required
+                name="usernameField"
+            />
+
+            <InputText
+                :bottom-bar="true"
+                type="password"
+                placeholder="Salasana"
+                placeholder-color="rgba(0, 0, 0, 0.4)"
+                icon-left="light-icon-lock"
+                required
+                name="passwordField"
+            />
+
+            <InputText
+                :bottom-bar="true"
+                placeholder="OTP"
+                placeholder-color="rgba(0, 0, 0, 0.4)"
+                maxlength="6"
+                icon-left="light-icon-key"
+                type="text"
+                required
+                name="otpField"
+            />
+
+            <br/>
+            <Button label="Kirjaudu sisään"
+                type="submit"
+                size="md"
+                class="lv--success"
+                icon-right="light-icon-arrow-narrow-right"
+                rounded
+            />
         </form>
+
+        <p>{{loginResponse}}</p>
+
     </div>
 </template>
 
 <script>
 import axios from "../axios";
+import InputText from 'lightvue/input';
+import Button from 'lightvue/button';
+
+import "light-icons/dist/light-icon.css";
 
 export default {
     
     name: 'LoginFormComponent',
     components: {
-        
+        InputText,
+        Button,
     },
     data () {
         return {
-            username: '',
-            password: '',
-            otp: '',
             loginResponse: '',
-            isLoggedIn: false
+            isLoggedIn: false,
+            password: '',
+            username: '',
+            otp: '',
         }
     },
     methods: {
-        AuthenticateUser() {
+        AuthenticateUser(event) {
+            
+            // use names from the forms as vars in this
+            const {usernameField, passwordField, otpField} = Object.fromEntries(new FormData(event.target));
+
+            this.username = usernameField;
+            this.password = passwordField;
+            this.otp = otpField;
 
             if(this.otp.length !== 6) {
                 this.loginResponse = "OTP koodi on liian lyhyt";
@@ -110,17 +148,5 @@ export default {
     width:50%;
     margin:0 auto;
     padding: 2rem;
-}
-
-#submitLogin {
-    margin-top: 1rem;
-}
-
-#response {
-    margin-top: 1rem;
-}
-
-label{
-    float:left;
 }
 </style>

@@ -13,6 +13,7 @@
     "chart.js": "^3.8.0",
     "core-js": "^3.8.3",
     "dotenv": "^16.0.1",
+    "light-icons": "^1.0.10",
     "lightvue": "^1.4.9",
     "qrcode.vue": "^3.3.3",
     "vue": "^3.2.13",
