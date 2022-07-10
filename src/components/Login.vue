@@ -48,9 +48,8 @@
                 rounded
             />
         </form>
-
+        
         <p>{{loginResponse}}</p>
-
     </div>
 </template>
 

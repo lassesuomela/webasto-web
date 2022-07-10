@@ -26,26 +26,46 @@
     </div>
 
     <div class="container" v-if=fetchedToken>
-            <input type="text" placeholder="OTP koodi" v-model="otpForDeletion" required maxlength=6/>
+        <form  @Submit.prevent=removeOTP id="removeOTPForm">
+            <InputText
+                :bottom-bar="true"
+                placeholder="OTP"
+                placeholder-color="rgba(0, 0, 0, 0.4)"
+                maxlength="6"
+                icon-left="light-icon-key"
+                type="text"
+                required
+                name="otpField"
+            />
 
-            <div class="container">
-                <input type="submit" class="btn btn-danger" @click=removeOTP value="Poista OTP käytöstä"/>
-            </div>
+            <br/>
+            <Button label="Poista OTP käytöstä"
+                type="submit"
+                size="md"
+                class="lv--danger"
+                icon-right="light-icon-arrow-narrow-right"
+                rounded
+            />
 
             <div class="container" v-if=message>
                 <p>{{message}}</p>
             </div>
+        </form>
     </div>
 </template>
 
 <script>
 
 import axios from "../axios";
+import InputText from 'lightvue/input';
+import Button from 'lightvue/button';
 
 export default {
     
     name: 'SettingsComponent',
     components: {
+        InputText,
+        Button
     },
     data () {
         return {
@@ -79,7 +99,16 @@ export default {
             this.firstTimeSetup = false;
             this.genToken();
         },
-        removeOTP() {
+        removeOTP(event) {
+
+            const {otpField} = Object.fromEntries(new FormData(event.target));
+
+            this.otpForDeletion = otpField;
+
+            if(this.otpForDeletion.length !== 6) {
+                this.message = "OTP koodi on liian lyhyt";
+                return;
+            }
 
             let data = {
                 otp: this.otpForDeletion,
@@ -99,3 +128,13 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+#removeOTPForm {
+    display:block;
+    width:50%;
+    margin:0 auto;
+    padding: 2rem;
+}
+</style>
