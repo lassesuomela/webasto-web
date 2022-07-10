@@ -4,6 +4,10 @@
         <h2>Uptime</h2>
     </div>
 
+    <div v-if="!isLoaded" class="container">
+        <Loader type="ball-pulse" :scale="1.5"/>
+    </div>
+
     <Bar v-if="isLoaded"
         :chart-data="this.chartData"
         :height="32"
@@ -14,6 +18,7 @@
 
 <script>
 import axios from "../axios";
+import Loader from 'lightvue/loaders';
 
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
@@ -24,7 +29,8 @@ export default {
     
     name: 'BarChartComponent',
     components: {
-        Bar
+        Bar,
+        Loader
     },
     data () {
         return {

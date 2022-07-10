@@ -4,7 +4,11 @@
         <h2>Ajastimet</h2>
     </div>
 
-    <table class="table table-bordered table-striped">
+    <div v-if=!loaded class="container">
+        <Loader type="ball-pulse" :scale="1.5"/>
+    </div>
+
+    <table class="table table-bordered table-striped" v-if=loaded>
         <thead>
             <tr>
                 <th>Viikonpäivä</th>
@@ -33,18 +37,21 @@
 
 <script>
 
-
 import axios from "../axios";
+import Loader from 'lightvue/loaders';
 
 export default {
     
+    
     name: 'TimersComponent',
     components: {
+        Loader
     },
     data () {
         return {
             timers: [],
-            weekdays: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"]
+            weekdays: ["Maanantai", "Tiistai", "Keskiviikko", "Torstai", "Perjantai"],
+            loaded: false
         }
     },
     methods: {
@@ -67,6 +74,8 @@ export default {
                         this.timers[i].enabled2 = 'Kyllä';
                     }
                 }
+
+                this.loaded = true;
             })
         }
     },

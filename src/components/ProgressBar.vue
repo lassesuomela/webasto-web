@@ -1,13 +1,15 @@
 <template>
     <div class="container">
+
         <div class="container">
             <h2>Päänäkymä</h2>
         </div>
+
         <div class="container">
             
-            <LvProgressBar :value="value" :showValue="false" color="#198754" />
+            <LvProgressBar :value="value" :showValue="false" color="#198754" v-if="status"/>
             
-            <div class="container">
+            <div class="container" v-if="status">
                 <p>Päälläoloaika: {{currentOnTime}} / {{maxOnTime}} min</p>
             </div>
             <p>Webaston tila: 
