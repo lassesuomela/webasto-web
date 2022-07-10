@@ -48,22 +48,19 @@ export default {
     },
     methods: {
         AuthenticateUser() {
+
+            if(this.otp.length !== 6) {
+                this.loginResponse = "OTP koodi on liian lyhyt";
+                return;
+            }
+
             let data = {
                 username: this.username,
                 password: this.password,
                 otp: this.otp
             }
+            
             axios.post("/api/login", data).then(response => {
-
-                if(response.status === 429) {
-                    this.loginResponse = "Liikaa pyyntöjä liian pienessä ajassa. Kokeile myöhemmin uudestaan.";
-                    return;
-                }
-
-                if(response.status !== 200) {
-                    this.loginResponse = "Virhe palvelimella";
-                    return;
-                }
 
                 this.loginResponse = response.data.message;
 
@@ -73,11 +70,27 @@ export default {
 
                     this.$router.push({name:"Home"});
                 }
+            }).catch(error => {
+
+                if(error.response.status === 429) {
+                    this.loginResponse = "Liikaa pyyntöjä liian pienessä ajassa. Kokeile myöhemmin uudestaan.";
+                    return;
+                }
+
+                if(error.response.status === 400) {
+                    this.loginResponse = "Väärin täytetyt kentät";
+                    return;
+                }
+
+                if(error.response.status !== 200) {
+                    this.loginResponse = "Virhe palvelimella";
+                    return;
+                }
             })
         }
     },
     async mounted () {
-        
+
         const response = await axios.get('/api/logs');
 
         if(response.data.status === "success"){
