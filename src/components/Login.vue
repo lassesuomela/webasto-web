@@ -85,7 +85,7 @@ export default {
             this.password = passwordField;
             this.otp = otpField;
 
-            if(this.otp.length !== 6) {
+            if(this.otp.length < 6 && this.otp.length > 0) {
                 this.loginResponse = "OTP koodi on liian lyhyt";
                 return;
             }
