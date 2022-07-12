@@ -35,7 +35,6 @@
                 maxlength="6"
                 icon-left="light-icon-key"
                 type="text"
-                required
                 name="otpField"
             />
 

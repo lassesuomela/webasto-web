@@ -127,6 +127,8 @@ export default {
 
             axios.post('/api/secret/remove', data).then(response => {
                 this.message = response.data.message;
+
+                this.$router.go();
             }).catch(error => {
                 this.message = error.response.data.message;
                 console.log(error.response.data);
