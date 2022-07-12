@@ -23,9 +23,9 @@
         </form>
     </div>
 
-    
+    <LoaderTemplate :isLoaded="loaded"/>
 
-    <div class="container">
+    <div class="container" v-if="loaded">
 
         <h2>Tämänhetkinen OTA:</h2>
 
@@ -47,11 +47,13 @@
 
 <script>
 import axios from "../axios";
+import LoaderTemplate from './LoaderTemplate.vue';
 
 export default {
     
     name: 'FileUploadComponent',
     components: {
+        LoaderTemplate
     },
     data () {
         return {
@@ -59,6 +61,7 @@ export default {
             uploadedFiles: null,
             fileStatusError: null,
             versioNro: null,
+            loaded: false
         }
     },
     methods: {
@@ -86,7 +89,10 @@ export default {
             })
         },
         CheckUploadedFiles(){
+
             axios.get('/ota/version').then(response => {
+
+                this.loaded = true;
 
                 if(response.data.status === "error"){
                     this.fileStatusError = response.data.message;

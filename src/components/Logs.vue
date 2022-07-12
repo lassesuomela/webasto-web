@@ -4,9 +4,7 @@
         <h2>Historia</h2>
     </div>
 
-    <div v-if=!loaded class="container">
-        <Loader type="ball-pulse" :scale="1.5"/>
-    </div>
+    <LoaderTemplate :isLoaded="loaded"/>
 
     <table class="table table-bordered table-striped" v-if="loaded">
         <thead>
@@ -37,7 +35,8 @@
 
 <script>
 import "bootstrap/dist/css/bootstrap.min.css";
-import Loader from 'lightvue/loaders';
+import LoaderTemplate from './LoaderTemplate.vue';
+
 
 import axios from "../axios";
 
@@ -45,7 +44,7 @@ export default {
     
     name: 'LogsComponent',
     components: {
-        Loader
+        LoaderTemplate
     },
     data () {
         return {

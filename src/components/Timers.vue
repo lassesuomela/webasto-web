@@ -4,11 +4,9 @@
         <h2>Ajastimet</h2>
     </div>
 
-    <div v-if=!loaded class="container">
-        <Loader type="ball-pulse" :scale="1.5"/>
-    </div>
+    <LoaderTemplate :isLoaded="loaded"/>
 
-    <table class="table table-bordered table-striped" v-if=loaded>
+    <table class="table table-bordered table-striped" v-if="loaded">
         <thead>
             <tr>
                 <th>Viikonpäivä</th>
@@ -38,14 +36,14 @@
 <script>
 
 import axios from "../axios";
-import Loader from 'lightvue/loaders';
+import LoaderTemplate from './LoaderTemplate.vue';
 
 export default {
     
     
     name: 'TimersComponent',
     components: {
-        Loader
+        LoaderTemplate
     },
     data () {
         return {
