@@ -7,6 +7,7 @@ import ProgressBar from "@/components/ProgressBar.vue";
 import BarChart from "@/components/BarChart.vue";
 import FileUpload from "@/components/FileUpload.vue";
 import Settings from "@/components/Settings.vue";
+import Error from "@/components/Error.vue";
 
 import axios from "../axios"
 
@@ -71,6 +72,11 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path:"/tooManyRequests",
+    name:"Error429",
+    component: Error,
   }
   
 ];
@@ -97,6 +103,12 @@ router.beforeEach((to, next) => {
         console.log("Key is bad");
         
         return router.push({name:"Login"});
+      }
+
+      if(error.response.status === 429){
+        // too many requestss
+        
+        return router.push({name:"Error429"});
       }
     })
   }

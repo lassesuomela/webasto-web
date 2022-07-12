@@ -126,15 +126,8 @@ export default {
             })
         }
     },
-    async mounted () {
+    created () {
 
-        const response = await axios.get('/api/logs');
-
-        if(response.data.status === "success"){
-            this.$router.push({name:"Home"});
-        }else{
-            localStorage.removeItem("token");
-        }
     }
 }
 
