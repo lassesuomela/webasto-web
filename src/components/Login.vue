@@ -1,6 +1,8 @@
 
 <template>
 
+    <Card padding="1rem">
+
     <div class="container">
         <h2>Kirjaudu sisään</h2>
     </div>
@@ -50,12 +52,14 @@
         
         <p>{{loginResponse}}</p>
     </div>
+    </Card>
 </template>
 
 <script>
 import axios from "../axios";
 import InputText from 'lightvue/input';
 import Button from 'lightvue/button';
+import Card from 'lightvue/card';
 
 import "light-icons/dist/light-icon.css";
 
@@ -65,6 +69,7 @@ export default {
     components: {
         InputText,
         Button,
+        Card
     },
     data () {
         return {

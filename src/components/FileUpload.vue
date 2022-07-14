@@ -82,10 +82,10 @@ export default {
                 }
             }).then(response => {
 
-                this.status = response.statusText;
+                this.status = response.data.message;
 
             }).catch(error => {
-                this.status = error;
+                this.status = error.data;
             })
         },
         CheckUploadedFiles(){

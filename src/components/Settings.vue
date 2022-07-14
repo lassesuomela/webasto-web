@@ -108,7 +108,7 @@ export default {
         },
         setupDone() {
             this.firstTimeSetup = false;
-            this.genToken();
+            this.$router.push({name:"Logout"});
         },
         removeOTP(event) {
 
