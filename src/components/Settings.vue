@@ -2,15 +2,13 @@
 
     <div class="container">
         <h2>Asetukset</h2>
+        <br/>
     </div>
 
     <LoaderTemplate :isLoaded="loaded"/>
 
-    <div v-if="loaded">
-        <div class="container">
-            <h3>OTP</h3>
-        </div>
-        
+    <Card v-if="loaded">
+        <h3>OTP</h3>
 
         <div class="container" v-if=!fetchedToken>
             <p>Konfiguroi OTP ensimmäisen kerran:
@@ -28,7 +26,7 @@
             </div>
         </div>
 
-        <div class="container" v-if=fetchedToken>
+        <div v-if=fetchedToken>
             <form  @Submit.prevent=removeOTP id="removeOTPForm">
                 <InputText
                     :bottom-bar="true"
@@ -55,7 +53,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </Card>
 </template>
 
 <script>
@@ -64,6 +62,7 @@ import axios from "../axios";
 import InputText from 'lightvue/input';
 import Button from 'lightvue/button';
 import LoaderTemplate from './LoaderTemplate.vue';
+import Card from 'lightvue/card';
 
 export default {
     
@@ -71,7 +70,8 @@ export default {
     components: {
         InputText,
         Button,
-        LoaderTemplate
+        LoaderTemplate,
+        Card
     },
     data () {
         return {

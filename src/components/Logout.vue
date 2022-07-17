@@ -16,7 +16,7 @@ export default {
             localStorage.removeItem("token");
 
             // and redirect to login page
-            this.$router.push({name:"Login"});
+            this.$router.push({name:'Login'});
         }
     },
     beforeMount () {

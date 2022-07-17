@@ -1,7 +1,10 @@
 <template>
 
-    <h2>OTA</h2>
-
+    <div class="container">
+        <h2>OTA</h2>
+        <br/>
+    </div>
+    <Card>
     <div class="container">
 
         <form @submit.prevent="HandleFile" id="fileUploadForm">
@@ -10,13 +13,23 @@
                 <input type="file" class="form-control" id="binFileField" accept=".bin">
             </div>
 
+            <br/>
+
             <div class="form-group">
                 <label for="versionTextField">Versio tiedosto</label>
                 <input type="file" class="form-control" id="versionTextField" accept=".txt">
             </div>
             
             <div id="submitLogin" class="form-group container">
-                <input type="submit" value="Lähetä" class="btn btn-primary">
+                
+                <Button
+                    label="Lähetä"
+                    type="submit"
+                    size="md"
+                    icon-right="light-icon-upload"
+                    rounded
+                    class="submitButton"
+                />
 
                 <p v-if="status" class="container">Status: {{status}}</p>
             </div>
@@ -43,17 +56,22 @@
             <p>Tiedostoja ei löytynyt</p>
         </div>
     </div>
+    </Card>
 </template>
 
 <script>
 import axios from "../axios";
 import LoaderTemplate from './LoaderTemplate.vue';
+import Card from 'lightvue/card';
+import Button from 'lightvue/button';
 
 export default {
     
     name: 'FileUploadComponent',
     components: {
-        LoaderTemplate
+        LoaderTemplate,
+        Card,
+        Button
     },
     data () {
         return {
@@ -113,3 +131,10 @@ export default {
 }
 
 </script>
+<style scoped>
+.submitButton {
+    background-color: #3F72AF; /** normal bg color*/
+    --theme-color: #112D4E; /** pressed bg color and hover text color*/
+    --theme-color-dark: #3F72AF; /** hover bg color */
+}
+</style>

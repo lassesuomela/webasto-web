@@ -2,21 +2,27 @@
 
     <div class="container">
         <h2>Uptime</h2>
+        <br/>
     </div>
 
     <LoaderTemplate :isLoaded="loaded"/>
 
-    <Bar v-if="loaded"
-        :chart-data="this.chartData"
-        :height="32"
-        :width="64"
-        :chart-options="options"
-    />
+    <Card v-if="loaded">
+        <div class="container">
+            <Bar v-if="loaded"
+                :chart-data="this.chartData"
+                :height="32"
+                :width="64"
+                :chart-options="options"
+            />
+        </div>
+    </Card>
 </template>
 
 <script>
 import axios from "../axios";
 import LoaderTemplate from './LoaderTemplate.vue';
+import Card from 'lightvue/card';
 
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
@@ -28,7 +34,8 @@ export default {
     name: 'BarChartComponent',
     components: {
         Bar,
-        LoaderTemplate
+        LoaderTemplate,
+        Card
     },
     data () {
         return {

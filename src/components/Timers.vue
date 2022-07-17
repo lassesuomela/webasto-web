@@ -2,48 +2,55 @@
 
     <div class="container">
         <h2>Ajastimet</h2>
+        <br/>
     </div>
 
     <LoaderTemplate :isLoaded="loaded"/>
 
-    <table class="table table-bordered table-striped" v-if="loaded">
-        <thead>
-            <tr>
-                <th>Viikonpäivä</th>
-                <th>1. Aloitusaika</th>
-                <th>2. Aloitusaika</th>
-                <th>1. Aktivoitu</th>
-                <th>2. Aktivoitu</th>
-                <th>Lämmitysaika (min)</th>
-            </tr>
-        </thead>
+    <Card>
+        <div class="container">
+            <table class="table table-bordered table-striped" v-if="loaded">
+                <thead>
+                    <tr>
+                        <th>Viikonpäivä</th>
+                        <th>1. Aloitusaika</th>
+                        <th>2. Aloitusaika</th>
+                        <th>1. Aktivoitu</th>
+                        <th>2. Aktivoitu</th>
+                        <th>Lämmitysaika (min)</th>
+                    </tr>
+                </thead>
 
-        <tbody>
-            <tr v-for="(timer, index) in timers" :key="timer">
+                <tbody>
+                    <tr v-for="(timer, index) in timers" :key="timer">
 
-                <td>{{weekdays[index]}}</td>
-                <td>{{timer.time}}</td>
-                <td>{{timer.time2}}</td>
-                <td>{{timer.enabled}}</td>
-                <td>{{timer.enabled2}}</td>
-                <td>{{timer.onTime}}</td>
-            </tr>
-        </tbody>
-        
-    </table>
+                        <td>{{weekdays[index]}}</td>
+                        <td>{{timer.time}}</td>
+                        <td>{{timer.time2}}</td>
+                        <td>{{timer.enabled}}</td>
+                        <td>{{timer.enabled2}}</td>
+                        <td>{{timer.onTime}}</td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </Card>
 </template>
 
 <script>
 
 import axios from "../axios";
 import LoaderTemplate from './LoaderTemplate.vue';
+import Card from 'lightvue/card';
 
 export default {
     
     
     name: 'TimersComponent',
     components: {
-        LoaderTemplate
+        LoaderTemplate,
+        Card
     },
     data () {
         return {
