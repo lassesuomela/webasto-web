@@ -130,11 +130,6 @@ export default {
                 }
             })
         }
-    },
-    created () {
-        if(localStorage.getItem("token")){
-            this.$router.go();
-        }
     }
 }
 
