@@ -1,58 +1,59 @@
 
 <template>
 
-    <Card padding="1rem">
+<div class="container col-md-8" id="loginPage">
+    <Card>
 
-    <div class="container">
-        <h2>Kirjaudu sisään</h2>
-    </div>
+        <div class="container">
+            <h1>Kirjaudu sisään</h1>
+        </div>
 
-    <div class="container">
 
         <form  @Submit.prevent=AuthenticateUser id="loginForm">
             <InputText
-                :bottom-bar="true"
                 placeholder="Käyttäjänimi"
-                placeholder-color="rgba(0, 0, 0, 0.4)"
+                placeholder-color="rgba(63, 114, 175, 0.4)"
                 icon-left="light-icon-user"
                 type="text"
                 required
                 name="usernameField"
+                class="inputField"
             />
 
             <InputText
-                :bottom-bar="true"
                 type="password"
                 placeholder="Salasana"
-                placeholder-color="rgba(0, 0, 0, 0.4)"
+                placeholder-color="rgba(63, 114, 175, 0.4)"
                 icon-left="light-icon-lock"
                 required
                 name="passwordField"
+                class="inputField"
             />
 
             <InputText
-                :bottom-bar="true"
                 placeholder="OTP"
-                placeholder-color="rgba(0, 0, 0, 0.4)"
+                placeholder-color="rgba(63, 114, 175, 0.4)"
                 maxlength="6"
                 icon-left="light-icon-key"
                 type="text"
                 name="otpField"
+                class="inputField"
             />
 
-            <br/>
-            <Button label="Kirjaudu sisään"
-                type="submit"
-                size="md"
-                class="lv--success"
-                icon-right="light-icon-arrow-narrow-right"
-                rounded
-            />
+            <div class="container">
+                <Button label="Kirjaudu sisään"
+                    type="submit"
+                    size="md"
+                    icon-right="light-icon-arrow-narrow-right"
+                    rounded
+                    class="submitButton"
+                />
+            </div>
         </form>
-        
+
         <p>{{loginResponse}}</p>
-    </div>
     </Card>
+</div>
 </template>
 
 <script>
@@ -69,7 +70,7 @@ export default {
     components: {
         InputText,
         Button,
-        Card
+        Card,
     },
     data () {
         return {
@@ -119,7 +120,7 @@ export default {
                 }
 
                 if(error.response.status === 400) {
-                    this.loginResponse = "Väärin täytetyt kentät";
+                    this.loginResponse = "Täytä kaikki kentät";
                     return;
                 }
 
@@ -139,10 +140,21 @@ export default {
 
 <style scoped>
 
+#loginPage {
+    padding-top:6rem;
+}
 #loginForm {
     display:block;
     width:50%;
     margin:0 auto;
     padding: 2rem;
+}
+.submitButton {
+    background-color: #3F72AF; /** normal bg color*/
+    --theme-color: #112D4E; /** pressed bg color and hover text color*/
+    --theme-color-dark: #3F72AF; /** hover bg color */
+}
+.inputField {
+    background-color: #3F72AF;
 }
 </style>

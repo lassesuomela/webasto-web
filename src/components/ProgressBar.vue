@@ -1,33 +1,60 @@
 <template>
 
     <div class="container">
+        <h2>Päänäkymä</h2>
+        <br/>
+    </div>
 
-        <div class="container">
-            <h2>Päänäkymä</h2>
-        </div>
+    <LoaderTemplate :isLoaded="loaded" />
 
-        <LoaderTemplate :isLoaded="loaded"/>
+    <div v-if="loaded">
+        <div class="row">
 
-        <div v-if="loaded">
-            <div class="container">
+            <div class="col">
+                <Card>
+                    <div class="row">
+
+                        <p>Webaston tila:</p>
+
+                        <div class="statuSymbol" v-if="status" style="background:#198754"></div>
+                        <div class="statuSymbol" v-else style="background:#dc3545"></div>
+
+                        <div class="w-100"></div>
+                        <br/>
+
+                        <span v-if="status">Päällä</span>
+                        <span v-else>Sammutettu</span>
+                        
+                    </div>
+                </Card>
+            </div>
                 
-                <LvProgressBar :value="value" :showValue="false" color="#198754" v-if="status"/>
+            <div class="col">
                 
-                <div class="container" v-if="status">
-                    <p>Päälläoloaika: {{currentOnTime}} / {{maxOnTime}} min</p>
-                </div>
-                <p>Webaston tila: 
-                    <span v-if="status">Päällä</span>
-                    <span v-else>Sammutettu</span>
-                </p>
+                <Card>
+                    <LvProgressBar :value="value" :showValue="false" color="#198754" />
+                    <div class="container">
+                        <p>Päälläoloaika: {{currentOnTime}} / {{maxOnTime}} min</p>
 
-                <p>Päivitetty: {{lastUpdate}}</p>
-                <h3 v-if="serverError">Häiriö palvelimella</h3>
-
+                        <p>Viimeisin päivitys:</p>
+                        <p>{{lastUpdate}}</p>
+                        <h3 v-if="serverError">Häiriö palvelimella</h3>
+                    </div>
+                </Card>
             </div>
 
-            <TemperatureChart/>
-            <VoltageChart/>
+        </div>
+
+        <div class="container">
+            <Card>
+                <TemperatureChart/>
+            </Card>
+        </div>
+    
+        <div class="container">
+            <Card>
+                <VoltageChart/>
+            </Card>
         </div>
     </div>
     
@@ -40,6 +67,7 @@ import LvProgressBar from 'lightvue/progress-bar';
 import TemperatureChart from './TemperatureChart.vue';
 import VoltageChart from './VoltageChart.vue';
 import LoaderTemplate from './LoaderTemplate.vue';
+import Card from 'lightvue/card';
 
 export default {
     
@@ -48,7 +76,8 @@ export default {
         LvProgressBar,
         TemperatureChart,
         VoltageChart,
-        LoaderTemplate
+        LoaderTemplate,
+        Card
     },
     data () {
         return {
@@ -99,3 +128,15 @@ export default {
 }
 
 </script>
+<style scoped>
+body {
+    color: #112D4E
+}
+
+.statuSymbol {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+</style>

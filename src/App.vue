@@ -1,10 +1,10 @@
 <template>
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
+  <nav class="navbar navbar-expand navbar-dark">
 
       <ul class="navbar-nav">
 
-        <p class="navbar-brand">Webaston ohjain</p>
+        <p class="navbar-brand">Webasto - Dashboard</p>
 
           <router-link v-if="hasToken" :to="{name: 'Home'}" class="nav-link">Päänäkymä</router-link>
           <router-link v-if="hasToken" :to="{name: 'Timers'}" class="nav-link">Ajastimet</router-link>
@@ -36,6 +36,8 @@ export default {
   beforeMount () {
     if(localStorage.getItem('token')){
       this.hasToken = true;
+
+      this.$router.push({name:"Home"});
     }
   }
 }
@@ -43,22 +45,24 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Condensed';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #112D4E;
 }
-
+nav {
+  background-color: #3F72AF;
+}
 .container {
   margin-top: 2rem;
 }
-
 .navbar-nav{
-  margin: 1rem 0 0 1rem;
+  margin: 1rem 0 0 2rem;
 }
-
 .exact-active-link {
   font-weight: bold;
 }

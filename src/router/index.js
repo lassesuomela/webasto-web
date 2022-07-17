@@ -90,6 +90,8 @@ const router = createRouter({
 
 router.beforeEach((to, next) => {
 
+  document.title = 'Webasto - ' + to.name;
+
   if(to.meta.requireAuth) {
 
     axios.get('/api/voltage').then(response => {
