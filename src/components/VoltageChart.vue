@@ -103,7 +103,7 @@ export default {
                     labels: this.labelData,
                     datasets: [{
                         label: 'Jännite',
-                        backgroundColor: '#0d6efd',
+                        backgroundColor: '#3F72AF',
                         data: this.voltageData.reverse(),
                         yAxisID: 'VoltageAxis'
                     }]

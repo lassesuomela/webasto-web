@@ -10,10 +10,17 @@
     <Card v-if="loaded">
         <h3>OTP</h3>
 
-        <div class="container" v-if=!fetchedToken>
-            <p>Konfiguroi OTP ensimmäisen kerran:
-                <span><button class="btn btn-primary" @click=setupOTP>Setup</button></span>
-            </p>
+        <div class="container" v-if="!fetchedToken && !doingFirstTimeSetup">
+            <p>Konfiguroi OTP ensimmäisen kerran:</p>
+                <Button 
+                    label="Setup"
+                    type="submit"
+                    size="md"
+                    class="lv--info"
+                    icon-right="light-icon-tool"
+                    rounded
+                    @click=setupOTP
+                />
         </div>
 
         <div class="container" v-if=firstTimeSetup>
@@ -21,17 +28,28 @@
                 <p>QR Code:</p>
                 
                 <img :src=QRValue>
-                <br/>
-                <button class="btn btn-success" @click=setupDone>Valmis</button>
+
+                <p>Secret: {{secret}}</p>   
+
+                <div class="container">
+                    <Button 
+                        label="Valmis"
+                        type="submit"
+                        size="md"
+                        class="lv--complementary"
+                        icon-right="light-icon-arrow-narrow-right"
+                        rounded
+                        @click=setupDone
+                    />
+                </div>
             </div>
         </div>
 
         <div v-if=fetchedToken>
             <form  @Submit.prevent=removeOTP id="removeOTPForm">
                 <InputText
-                    :bottom-bar="true"
                     placeholder="OTP"
-                    placeholder-color="rgba(0, 0, 0, 0.4)"
+                    placeholder-color="rgba(63, 114, 175, 0.4)"
                     maxlength="6"
                     icon-left="light-icon-key"
                     type="text"
@@ -40,7 +58,8 @@
                 />
 
                 <br/>
-                <Button label="Poista OTP käytöstä"
+                <Button
+                    label="Poista OTP käytöstä"
                     type="submit"
                     size="md"
                     class="lv--danger"
@@ -80,14 +99,18 @@ export default {
             fetchedToken: false,
             otpForDeletion: '',
             message: '',
-            loaded: false
+            loaded: false,
+            doingFirstTimeSetup: false,
+            secret: '',
         }
     },
     methods: {
         setupOTP() {
+            this.doingFirstTimeSetup = true;
             axios.post('/api/secret').then(response => {
 
                 this.QRValue = response.data.secret.qr;
+                this.secret = response.data.secret.secret;
                 this.firstTimeSetup = true;
             })
         },
