@@ -114,6 +114,11 @@ export default {
                 }
             }).catch(error => {
 
+                if(error.response.status === 400 && error.response.data.status === "error") {
+                    this.loginResponse = error.response.data.message;
+                    return;
+                }
+
                 if(error.response.status === 429) {
                     this.loginResponse = "Liikaa pyyntöjä liian pienessä ajassa. Kokeile myöhemmin uudestaan.";
                     return;
