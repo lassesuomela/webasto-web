@@ -9,6 +9,7 @@
           <router-link v-if="hasToken" :to="{name: 'Home'}" class="nav-link">Päänäkymä</router-link>
           <router-link v-if="hasToken" :to="{name: 'Timers'}" class="nav-link">Ajastimet</router-link>
           <router-link v-if="hasToken" :to="{name: 'Logs'}" class="nav-link">Historia</router-link>
+          <router-link v-if="hasToken" :to="{name: 'History'}" class="nav-link">Tapahtuma historia</router-link>
           <router-link v-if="hasToken" :to="{name: 'Uptime'}" class="nav-link">Uptime</router-link>
           <router-link v-if="hasToken" :to="{name: 'Upload'}" class="nav-link">OTA</router-link>
           <router-link v-if="hasToken" :to="{name: 'Settings'}" class="nav-link">Asetukset</router-link>

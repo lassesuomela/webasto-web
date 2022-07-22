@@ -8,6 +8,7 @@ import BarChart from "@/components/BarChart.vue";
 import FileUpload from "@/components/FileUpload.vue";
 import Settings from "@/components/Settings.vue";
 import Error from "@/components/Error.vue";
+import History from "@/components/History.vue";
 
 import axios from "../axios"
 
@@ -77,6 +78,14 @@ const routes = [
     path:"/tooManyRequests",
     name:"Error429",
     component: Error,
+  },
+  {
+    path:"/history",
+    name:"History",
+    component: History,
+    meta: {
+      requireAuth: true
+    }
   }
   
 ];

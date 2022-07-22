@@ -1,7 +1,7 @@
 <template>
 
     <div class="container">
-        <h2>Historia</h2>
+        <h2>Tapahtuma historia</h2>
         <br/>
     </div>
 
@@ -12,25 +12,23 @@
             <table class="table table-bordered table-striped" v-if="loaded">
                 <thead>
                     <tr>
-                        <th>Aloitusaika</th>
-                        <th>Lopetusaika</th>
-                        <th>Lämmitysaika (min)</th>
+                        <th>Tapahtuma</th>
+                        <th>IP osoite</th>
                         <th>Aikaleima</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr v-for="log in logs" :key="log">
-                        <td>{{log.startTime}}</td>
-                        <td>{{log.endTime}}</td>
-                        <td>{{log.onTime}}</td>
-                        <td>{{log.timestamp}}</td>
+                    <tr v-for="record in history" :key="record">
+                        <td>{{record.action}}</td>
+                        <td>{{record.ip}}</td>
+                        <td>{{record.timestamp}}</td>
                     </tr>
                 </tbody>
                 
             </table>
             <div v-if="maxPage > 1">
-                <button class="btn" v-for="index in maxPage" :key="index" @click="getLogs(index)">{{index}}</button>
+                <button class="btn" v-for="index in maxPage" :key="index" @click="getHistory(index)">{{index}}</button>
             </div>
         </div>
     </Card>
@@ -45,34 +43,34 @@ import axios from "../axios";
 
 export default {
     
-    name: 'LogsComponent',
+    name: 'HistoryComponent',
     components: {
         LoaderTemplate,
         Card
     },
     data () {
         return {
-            logs: [],
+            history: [],
             page: 1,
             maxPage: 1,
             loaded: false
         }
     },
     methods: {
-        getLogs(n) {
-            axios.get('/api/logs/' + n).then(response => {
+        getHistory(n) {
+            axios.get('/api/history/' + n).then(response => {
 
                 if(response.data.status === "success"){
-                    this.logs = response.data.data;
+                    this.history = response.data.data;
                     this.maxPage = response.data.maxPageAmount;
 
-                    for(var i = 0; i < this.logs.length; i++){
+                    for(var i = 0; i < this.history.length; i++){
 
-                        const event = new Date(this.logs[i].timestamp);
+                        const event = new Date(this.history[i].timestamp);
                         
                         let newTimestamp = event.toLocaleString('fi-FI');
 
-                        this.logs[i].timestamp = newTimestamp;
+                        this.history[i].timestamp = newTimestamp;
                     }
                 }
                 
@@ -81,7 +79,7 @@ export default {
         }
     },
     mounted () {
-        this.getLogs(this.page)
+        this.getHistory(this.page)
     }
 }
 
