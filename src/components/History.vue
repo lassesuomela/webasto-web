@@ -13,6 +13,7 @@
                 <thead>
                     <tr>
                         <th>Tapahtuma</th>
+                        <th>User-Agent</th>
                         <th>IP osoite</th>
                         <th>Aikaleima</th>
                     </tr>
@@ -21,14 +22,25 @@
                 <tbody>
                     <tr v-for="record in history" :key="record">
                         <td>{{record.action}}</td>
+                        <td>{{record.userAgent}}</td>
                         <td>{{record.ip}}</td>
                         <td>{{record.timestamp}}</td>
                     </tr>
                 </tbody>
                 
             </table>
-            <div v-if="maxPage > 1">
+            <div v-if="maxPage > 1 && maxPage < 5">
                 <button class="btn" v-for="index in maxPage" :key="index" @click="getHistory(index)">{{index}}</button>
+            </div>
+            <div v-else>
+
+                <button v-if="page != 1" class="btn" @click="getHistory(page - 1)">{{page - 1}}</button>
+                <button class="btn" @click="getHistory(page)" style="font-weight:bold">{{page}}</button>
+                <button v-if="page !== maxPage" class="btn" @click="getHistory(page + 1)">{{page + 1}}</button>
+                <button v-if="page !== maxPage && page < 2" class="btn" @click="getHistory(page + 2)">{{page + 2}}</button>
+                <span v-if="page !== maxPage">...</span>
+
+                <button v-if="page !== maxPage" class="btn" @click="getHistory(maxPage)">{{maxPage}}</button>
             </div>
         </div>
     </Card>
@@ -58,6 +70,9 @@ export default {
     },
     methods: {
         getHistory(n) {
+
+            this.page = n;
+
             axios.get('/api/history/' + n).then(response => {
 
                 if(response.data.status === "success"){
@@ -66,11 +81,15 @@ export default {
 
                     for(var i = 0; i < this.history.length; i++){
 
-                        const event = new Date(this.history[i].timestamp);
-                        
-                        let newTimestamp = event.toLocaleString('fi-FI');
+                        const event = new Date(this.history[i].timestamp).toUTCString();
 
-                        this.history[i].timestamp = newTimestamp;
+                        this.history[i].timestamp = event;
+
+                        if(this.history[i].userAgent){
+                            if(this.history[i].userAgent.length > 30){
+                                this.history[i].userAgent = this.history[i].userAgent.substring(0,35) + '...';
+                            }
+                        }
                     }
                 }
                 
