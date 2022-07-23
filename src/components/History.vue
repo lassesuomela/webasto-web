@@ -38,9 +38,9 @@
                 <button class="btn" @click="getHistory(page)" style="font-weight:bold">{{page}}</button>
                 <button v-if="page !== maxPage" class="btn" @click="getHistory(page + 1)">{{page + 1}}</button>
                 <button v-if="page !== maxPage && page < 2" class="btn" @click="getHistory(page + 2)">{{page + 2}}</button>
-                <span v-if="page !== maxPage">...</span>
+                <span v-if="page !== maxPage && page !== (maxPage - 1)">...</span>
 
-                <button v-if="page !== maxPage" class="btn" @click="getHistory(maxPage)">{{maxPage}}</button>
+                <button v-if="page !== maxPage && page !== (maxPage - 1)" class="btn" @click="getHistory(maxPage)">{{maxPage}}</button>
             </div>
         </div>
     </Card>
