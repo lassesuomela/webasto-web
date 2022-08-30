@@ -110,7 +110,8 @@ export default {
                     localStorage.removeItem("token");
                     localStorage.setItem("token", response.data.token);
 
-                    this.$router.push({name:"Home"});
+                    // refresh instead of redirect
+                    this.$router.go();
                 }
             }).catch(error => {
 
@@ -134,6 +135,11 @@ export default {
                     return;
                 }
             })
+        }
+    },
+    mounted () {
+        if(localStorage.getItem('token')){
+            this.$router.push({name:"Home"});
         }
     }
 }

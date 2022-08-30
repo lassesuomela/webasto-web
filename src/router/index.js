@@ -103,22 +103,22 @@ router.beforeEach((to, next) => {
 
   if(to.meta.requireAuth) {
 
+    // api call is used to determine if the jwt token is still valid
     axios.get('/api/voltage').then(response => {
       if(response.data.status){
-        console.log("Key is good");
+        // valid key
         next();
       }
     }).catch(error => {
+      localStorage.removeItem("token");
+
       if(error.response.status === 401 || error.response.status === 403){
         // key expired
-        console.log("Key is bad");
-        
         return router.push({name:"Login"});
       }
 
       if(error.response.status === 429){
-        // too many requestss
-        
+        // too many requests
         return router.push({name:"Error429"});
       }
     })
