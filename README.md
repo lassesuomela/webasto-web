@@ -2,7 +2,7 @@
 Made with Vue.js 3 and [lightvue](https://lightvue.org) UI framework to **view** data from [webasto-backend](https://github.com/lassesuomela/webasto-backend) project.
 
 # Demo available
-[https://webasto.lassesuomela.com](https://webasto.lassesuomela.com)
+[https://webasto.saunagaming.com](https://webasto.saunagaming.com)
 
 Username: demo
 
