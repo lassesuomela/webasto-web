@@ -99,6 +99,11 @@ const router = createRouter({
 
 router.beforeEach((to, next) => {
 
+  // this is to 'fix' ghost token 
+  if(to.name === 'Logout' && localStorage.getItem('token')){
+    router.go();
+  }
+
   document.title = 'Webasto - ' + to.name;
 
   if(to.meta.requireAuth) {

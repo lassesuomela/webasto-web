@@ -34,7 +34,7 @@ export default {
       hasToken: false,
     }
   },
-  beforeMount () {
+  created () {
     if(localStorage.getItem('token')){
       this.hasToken = true;
 

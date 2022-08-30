@@ -11,16 +11,21 @@ export default {
         }
     },
     methods: {
-        LogOut() {
-            // remove token from local storage
-            localStorage.removeItem("token");
+        Logout() {
 
-            // and redirect to login page
-            this.$router.push({name:'Login'});
+            if(localStorage.getItem("token")){
+                // remove token from local storage
+                localStorage.removeItem("token");
+                // and redirect to login page
+                this.$router.go();
+            }else{
+                this.$router.push({name:"Login"});
+            }
+            
         }
     },
-    beforeMount () {
-        this.LogOut();
+    mounted () {
+        this.Logout();
     }
 }
 
