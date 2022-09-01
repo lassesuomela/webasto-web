@@ -12,4 +12,6 @@ COPY --from=build-stage /app/nginx.conf /temp/prod.conf
 RUN envsubst /app < /temp/prod.conf > /etc/nginx/nginx.conf
 
 EXPOSE 80
+EXPOSE 443
+
 CMD ["nginx", "-g", "daemon off;"]
