@@ -100,7 +100,7 @@ export default {
                 }
 
                 this.chartData = {
-                    labels: this.labelData,
+                    labels: this.labelData.reverse(),
                     datasets: [{
                         label: 'Jännite',
                         backgroundColor: '#3F72AF',
