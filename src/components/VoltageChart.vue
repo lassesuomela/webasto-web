@@ -90,14 +90,14 @@ export default {
                     this.voltageData[i] = response.data.voltages[i];
                 }
 
-                for(var i = 0; i < this.labelData.length; i++){
+                /*for(var i = 0; i < this.labelData.length; i++){
 
                     const event = new Date(this.labelData[i]);
                     
-                    let newTimestamp = event.toLocaleTimeString('fi-FI');
+                    let newTimestamp = event.toLocaleTimeString();
 
                     this.labelData[i] = newTimestamp;
-                }
+                }*/
 
                 this.chartData = {
                     labels: this.labelData.reverse(),
