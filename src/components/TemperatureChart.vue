@@ -64,20 +64,24 @@ export default {
                                 style: 'normal',
                                 lineHeight: 2
                             },
-                        }
+                        },
+                        suggestedMax: 30,
+                        suggestedMin: 0
                     },
                     HumidityAxis: {
                         type: 'linear',
                         position: 'right',
                         title: {
                             display: true,
-                            text: 'Relattivinen kosteus (%)',
+                            text: 'Kosteus (%)',
                             font: {
                                 size: 18,
                                 style: 'normal',
                                 lineHeight: 2
                             },
-                        }
+                        },
+                        max:100,
+                        min: 0
                     },
                     x: {
                         title: {
@@ -105,14 +109,14 @@ export default {
                     this.humiData[i] = response.data.humidities[i];
                 }
 
-                /*for(var i = 0; i < this.labelData.length; i++){
+                for(var i = 0; i < this.labelData.length; i++){
 
                     const event = new Date(this.labelData[i]);
                     
-                    let newTimestamp = event.toLocaleTimeString();
+                    let newTimestamp = event.toLocaleTimeString('fi-FI', { timeZone: 'UTC' });
 
                     this.labelData[i] = newTimestamp;
-                }*/
+                }
 
                 this.chartData = {
                     labels: this.labelData.reverse(),
@@ -124,7 +128,7 @@ export default {
                         yAxisID: 'TemperatureAxis'
                     },
                     {
-                        label: 'Relatiivinen kosteus',
+                        label: 'Kosteus',
                         backgroundColor: '#0dcaf0',
                         data: this.humiData.reverse(),
                         tension: 0.3,

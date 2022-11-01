@@ -70,7 +70,7 @@ export default {
 
                         const event = new Date(this.logs[i].timestamp);
                         
-                        let newTimestamp = event.toUTCString();
+                        let newTimestamp = event.toLocaleString('fi-FI', { timeZone: 'UTC' });
 
                         this.logs[i].timestamp = newTimestamp;
                     }

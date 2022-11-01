@@ -81,9 +81,10 @@ export default {
 
                     for(var i = 0; i < this.history.length; i++){
 
-                        const event = new Date(this.history[i].timestamp).toUTCString();
+                        const event = new Date(this.history[i].timestamp);
 
-                        this.history[i].timestamp = event;
+                        const newTimestamp = event.toLocaleString('fi-FI', { timeZone: 'UTC' });
+                        this.history[i].timestamp = newTimestamp;
 
                         if(this.history[i].userAgent){
                             if(this.history[i].userAgent.length > 30){
