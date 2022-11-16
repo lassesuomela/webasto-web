@@ -86,7 +86,7 @@ export default {
                     x: {
                         title: {
                             display: true,
-                            text: 'Viimeisin tunti',
+                            text: 'Viimeiset 24 tuntia',
                             font: {
                                 size: 18,
                                 style: 'normal',
