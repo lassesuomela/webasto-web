@@ -94,6 +94,11 @@ export default {
                             },
                         }
                     }
+                },
+                elements: {
+                    point: {
+                        radius: 2,
+                    },
                 }
             }
         }
@@ -124,14 +129,12 @@ export default {
                         label: 'Lämpötila',
                         backgroundColor: '#ffc107',
                         data: this.tempData.reverse(),
-                        tension: 0.3,
                         yAxisID: 'TemperatureAxis'
                     },
                     {
                         label: 'Kosteus',
                         backgroundColor: '#0dcaf0',
                         data: this.humiData.reverse(),
-                        tension: 0.3,
                         yAxisID: 'HumidityAxis'
                     }]
                 }   

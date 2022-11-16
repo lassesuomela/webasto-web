@@ -78,6 +78,11 @@ export default {
                             },
                         }
                     }
+                },
+                elements: {
+                    point: {
+                        radius: 2,
+                    },
                 }
             }
         }
