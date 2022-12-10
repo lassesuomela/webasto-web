@@ -81,8 +81,8 @@ export default {
                 },
                 elements: {
                     point: {
-                        radius: 2,
-                    },
+                        radius: 0,
+                    }
                 }
             }
         }
@@ -110,9 +110,10 @@ export default {
                     labels: this.labelData.reverse(),
                     datasets: [{
                         label: 'Jännite',
-                        backgroundColor: '#3F72AF',
                         data: this.voltageData.reverse(),
-                        yAxisID: 'VoltageAxis'
+                        yAxisID: 'VoltageAxis',
+                        backgroundColor: '#3F72AF',
+                        borderColor: '#3F72AF'
                     }]
                 }
 

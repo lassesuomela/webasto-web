@@ -97,8 +97,8 @@ export default {
                 },
                 elements: {
                     point: {
-                        radius: 2,
-                    },
+                        radius: 0
+                    }
                 }
             }
         }
@@ -127,15 +127,17 @@ export default {
                     labels: this.labelData.reverse(),
                     datasets: [{
                         label: 'Lämpötila',
-                        backgroundColor: '#ffc107',
                         data: this.tempData.reverse(),
-                        yAxisID: 'TemperatureAxis'
+                        yAxisID: 'TemperatureAxis',
+                        backgroundColor: '#ffc107',
+                        borderColor: '#ffc107'
                     },
                     {
                         label: 'Kosteus',
-                        backgroundColor: '#0dcaf0',
                         data: this.humiData.reverse(),
-                        yAxisID: 'HumidityAxis'
+                        yAxisID: 'HumidityAxis',
+                        backgroundColor: '#0dcaf0',
+                        borderColor: '#0dcaf0'
                     }]
                 }   
                 this.isLoaded = true;
